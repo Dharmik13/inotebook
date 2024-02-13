@@ -1,7 +1,7 @@
 // This is the model for write the schemas  and use this schemas inside the routes 
 
 const mongoose = require('mongoose');
-
+const { Schema } = mongoose;
 
 const UserSchema = new Schema({
     name: {

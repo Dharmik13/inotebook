@@ -1,6 +1,6 @@
 // This is the model for write the schemas  and use this schemas inside the routes 
 const mongoose = require('mongoose');
-
+const { Schema } = mongoose;
 
 const NotesSchema = new Schema({
 
@@ -23,4 +23,4 @@ const NotesSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('notes', NotesSchema)
+module.exports = mongoose.model('notes', NotesSchema);
