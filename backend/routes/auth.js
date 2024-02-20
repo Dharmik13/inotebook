@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = 'dharmikpatel$cric';
 
-// jwt is use for safe communication between client and server
+
 /*
  this simmiler to the
     app.get('/', (req, res) => {
