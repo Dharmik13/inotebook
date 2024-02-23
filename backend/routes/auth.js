@@ -5,6 +5,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
+const fetchuser = require('../middleware/fetchuser');
 
 const JWT_SECRET = 'dharmikpatel$cric';
 
@@ -18,7 +19,7 @@ const JWT_SECRET = 'dharmikpatel$cric';
 but here we use router.get(....)
 */
 
-// create a user using : Post " /api/auth/createuser" , No Login Required
+//Route 1 : create a user using : Post " /api/auth/createuser" , No Login Required
 router.post('/createuser', [
     // take it from express validator
     body('name', 'Enter valid name').isLength({ min: 2 }),
@@ -68,7 +69,7 @@ router.post('/createuser', [
 
 
 
-// Login a user using : Post " /api/auth/login" , No Login Required
+//Route 2 : Login a user using : Post " /api/auth/login" , No Login Required
 router.post('/login', [
     // take it from express validator
     body('email', 'Enter Valid Email please Cheack').isEmail(),
@@ -109,4 +110,18 @@ router.post('/login', [
 
 })
 
+
+//Route 3 : Get the Loggedin user Details using : Post " /api/auth/getuser" , Login Required
+
+router.post('/getuser', fetchuser, async (req, res) => {
+    try {
+        userId = req.user.id;
+        const user = await User.findById(userId).select("-password");
+        res.send(user);
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send("Internal Errors Occured");
+    }
+
+})
 module.exports = router;
