@@ -61,4 +61,70 @@ router.post('/addnote', fetchuser, [
     }
 
 })
+
+
+//Route 3 : Update an existing note using : Put " /api/notes/updatenote:id" , Login Required
+
+// update the note using the already exists note id  thats why i take this :-  /updatenote:id
+router.put('/updatenote/:id', fetchuser, async (req, res) => {
+
+    const { title, description, tag } = req.body;
+    try {
+
+        // create updateNote Object 
+        const updateNote = {};
+
+        if (title) { updateNote.title = title };
+        if (description) { updateNote.description = description };
+        if (tag) { updateNote.tag = tag };
+
+        // check the note is exists or not into the database whatever you want to update 
+        let note = await Note.findById(req.params.id);
+        if (!note) {
+
+            return res.status(404).send("Not Found");
+        }
+        // check the user , user is correct or not ,  user allowed to Updates ites own Notes or other user notes  , using toString() we can check
+        if (note.user.toString() !== req.user.id) {
+            return res.status(401).send("Not Allowed");
+        }
+
+        note = await Note.findByIdAndUpdate(req.params.id, { $set: updateNote }, { new: true });
+        res.json({ note });
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send("Internal Errors Occured");
+    }
+
+})
+
+
+//Route 3 : Delete  existing notes using : Delete " /api/notes/deletenote:id" , Login Required
+
+// Delete the note using the already exists note id  thats why i take this :-  /deletenote/:id
+router.delete('/deletenote/:id', fetchuser, async (req, res) => {
+
+    try {
+        // check the note is exists or not into the database whatever you want to Delete 
+        let note = await Note.findById(req.params.id);
+        if (!note) {
+
+            return res.status(404).send("Not Found");
+        }
+        // check the user , user is correct or not ,  user allowed to Delete ites own Notes or other user notes  , using toString() we can check
+        if (note.user.toString() !== req.user.id) {
+            return res.status(401).send("Not Allowed");
+        }
+
+        note = await Note.findByIdAndDelete(req.params.id)
+
+        res.json({ "success": "Note Has been Deleted", note: note });
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send("Internal Errors Occured");
+    }
+
+
+})
+
 module.exports = router;
