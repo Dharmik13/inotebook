@@ -1,0 +1,82 @@
+About Context Api :- 
+
+---> We use Context api because if our react app is big or if there are many components in the app then there is very tuff to pass the states .so for solve this we use state 
+
+For Use The COntext :-
+
+---> first of all inside the src folder we have to create context Folder.
+---> After create the context folder , we can create context 
+
+For create the Context :-
+
+---> for create the context we need to create the context inside the context folder like noteContext.js
+
+And the Syntex FOr create Context is :- 
+
+---> inside the noteContext.js :- 
+
+// this is the file for create the context and this is simillar for all react app only name change like noteContext, shopContext ......
+
+                        import { createContext } from "react";
+
+                        // syntex For create Context 
+                        const noteContext = createContext();
+
+                        export default noteContext;
+
+
+After Creating the Context We need to create State File , here Like noteState.js
+
+---> inside this noteState File We create All the State . this state file in this file we write all state and use context Api 
+
+
+// After That for use the Context Api We need to Import The Context :-
+
+---> for imp :-  import noteContext from "./noteContext";
+
+// Now and the Syntex of noteState.js is :- 
+
+                             import noteContext from "./noteContext";
+
+                             const noteState = (props) => {
+                                const state = {
+
+                                }
+
+                                return (
+                                    <noteContext.Provider vlaue = {state}>
+                                        {props.children}
+                                    </noteContext.Provider>
+                                )
+                             }
+
+
+After All We can Use context Or state in any component :- 
+
+--> for use in any component , in app.js file we need to wrap all component inside the noteState 
+
+like This :-   
+                             
+<!-- 
+function App() {
+    
+  return (
+    <>
+      <noteState>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/about' element={<About />} />
+          </Routes>
+        </Router >
+      </noteState>
+    </>
+  );
+} 
+-->
+
+
+If we Want to use Context Api noteContext in About Component the We can Use like this:- 
+   
+   const a = useContext(noteContext)
