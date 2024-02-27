@@ -8,3 +8,11 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+i {
+    cursor: pointer;
+}
+
+.form-control {
+    border: 1px solid black;
+}

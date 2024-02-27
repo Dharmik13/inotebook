@@ -9,7 +9,8 @@ import {
 import About from './components/About';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
-import NoteState from "./context/notes/noteState";;
+import NoteState from "./context/notes/noteState"; import Alert from "./components/Alert";
+;
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <NoteState>
         <Router>
           <Navbar />
+          <Alert message="This is Amazing react inotebook App." />
           <div className="container">
             <Routes>
               <Route exact path='/' element={<Home />} />

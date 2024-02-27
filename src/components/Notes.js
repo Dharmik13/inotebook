@@ -13,7 +13,7 @@ const Notes = () => {
                 <h3>Your Notes</h3>
                 {/* featch All notes Without Using Api , we do hard code   */}
                 {notes.map((note) => {
-                    return <Noteitem note={note} />
+                    return <Noteitem key={note._id} note={note} />
 
 
                 })}
