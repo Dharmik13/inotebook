@@ -1,10 +1,10 @@
 About Context Api :- 
 
----> We use Context api because if our react app is big or if there are many components in the app then there is very tuff to pass the states .so for solve this we use state 
+---> We use Context api because if our react app is big or if there are many components in the app then there is very tuff to pass the states .so for solve this we use Context Api. 
 
 For Use The COntext :-
 
----> first of all inside the src folder we have to create context Folder.
+---> first of all inside the src folder we need to create context Folder.
 ---> After create the context folder , we can create context 
 
 For create the Context :-
@@ -27,7 +27,7 @@ And the Syntex FOr create Context is :-
 
 After Creating the Context We need to create State File , here Like noteState.js
 
----> inside this noteState File We create All the State . this state file in this file we write all state and use context Api 
+---> inside this noteState File We create All the State . in this file we write all state and use context Api 
 
 
 // After That for use the Context Api We need to Import The Context :-
@@ -77,6 +77,6 @@ function App() {
 -->
 
 
-If we Want to use Context Api noteContext in About Component the We can Use like this:- 
+If we Want to use Context Api noteContext in About Component then We can Use like this:- 
    
    const a = useContext(noteContext)
