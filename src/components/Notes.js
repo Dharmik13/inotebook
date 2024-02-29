@@ -3,12 +3,15 @@
 import React, { useContext } from 'react'
 import noteContext from '../context/notes/noteContext';
 import Noteitem from './Noteitem';
+import Addnote from './Addnote';
 
 const Notes = () => {
     const context = useContext(noteContext);
-    const { notes, setnotes } = context;
+    const { notes } = context;
     return (
-        <div>
+        <>
+            <Addnote />
+
             <div className="row my-3">
                 <h3>Your Notes</h3>
                 {/* featch All notes Without Using Api , we do hard code   */}
@@ -17,8 +20,9 @@ const Notes = () => {
 
 
                 })}
-            </div>
-        </div>
+            </div >
+        </>
+
     )
 }
 
