@@ -6,78 +6,48 @@ import NoteContext from "./noteContext";
 
 
 const NoteState = (props) => {
+    const host = "http://localhost:5000";
 
-    const notesInitial = [
-        {
-            "_id": "65d831fded25632ea99f23ef0",
-            "user": "65d4380540ee73d8f2d44731",
-            "title": "virat King Kohli",
-            "description": "He is the best betsman all time",
-            "tag": "Cricket Lover",
-            "date": "1708667389993",
-            "__v": 0
-        },
-        {
-            "_id": "65d83273ed25632ea199f3ef6",
-            "user": "65d4380540ee73d8f2d44731",
-            "title": "Rohit Sharma The Hitter",
-            "description": "He is the best Hitter betsman all time and also known as Ro-Hitman Sharma",
-            "tag": "Cricket Lover",
-            "date": "1708667507850",
-            "__v": 0
-        },
-        {
-            "_id": "65d831fded25632ea599f3ef0",
-            "user": "65d4380540ee73d8f2d44731",
-            "title": "virat King Kohli",
-            "description": "He is the best betsman all time",
-            "tag": "Cricket Lover",
-            "date": "1708667389993",
-            "__v": 0
-        },
-        {
-            "_id": "65d83273ed25632e4a99f3ef6",
-            "user": "65d4380540ee73d8f2d44731",
-            "title": "Rohit Sharma The Hitter",
-            "description": "He is the best Hitter betsman all time and also known as Ro-Hitman Sharma",
-            "tag": "Cricket Lover",
-            "date": "1708667507850",
-            "__v": 0
-        },
-        {
-            "_id": "65d831fded25632ea699f3ef0",
-            "user": "65d4380540ee73d8f2d44731",
-            "title": "virat King Kohli",
-            "description": "He is the best betsman all time",
-            "tag": "Cricket Lover",
-            "date": "1708667389993",
-            "__v": 0
-        },
-        {
-            "_id": "65d83273ed25632e7a99f3ef6",
-            "user": "65d4380540ee73d8f2d44731",
-            "title": "Rohit Sharma The Hitter",
-            "description": "He is the best Hitter betsman all time and also known as Ro-Hitman Sharma",
-            "tag": "Cricket Lover",
-            "date": "1708667507850",
-            "__v": 0
-        },
-        {
-            "_id": "65d83b11d4ab56408e5bf0f5d",
-            "user": "65d4380540ee73d8f2d44731",
-            "title": "Kl Rahul The Class Rahul",
-            "description": "He is a Very classic Betsman ",
-            "tag": "Cricket",
-            "date": "1708669713555",
-            "__v": 0
-        }
-    ]
+    const notesInitial = []
 
     const [notes, setnotes] = useState(notesInitial);
 
-    // Add a Note
 
-    const addNote = (title, description, tag) => {
+    // Get All Notes 
+    const getallNote = async () => {
+
+        //API Call 
+        const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkNDM4MDU0MGVlNzNkOGYyZDQ0NzMxIn0sImlhdCI6MTcwODY2NDgzMH0.HX33fsqXEjTRzTRE4sS8A83lDC_43O5ypeYQvFnCoQU"
+            },
+        });
+        const json = await response.json();
+        console.log(json)
+        setnotes(json);
+    }
+
+
+
+    // Add a Note
+    const addNote = async (title, description, tag) => {
+
+        //API Call 
+        const response = await fetch(`${host}/api/notes/addnote`, {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkNDM4MDU0MGVlNzNkOGYyZDQ0NzMxIn0sImlhdCI6MTcwODY2NDgzMH0.HX33fsqXEjTRzTRE4sS8A83lDC_43O5ypeYQvFnCoQU"
+            },
+            body: JSON.stringify({ title, description, tag }),
+        });
+
+
+
+
+        // logic for ADD note in client side 
         const note = {
             "_id": "65d83273ed25632e7a99f3ef6",
             "user": "65d4380540ee73d8f2d4d4731",
@@ -90,21 +60,51 @@ const NoteState = (props) => {
         setnotes(notes.concat(note));
     }
 
+
+
     // Delete A note 
     const deleteNote = (id) => {
+
+        //API Call 
+
+        // logic for Delete in client side 
         const newNote = notes.filter((note) => {
             return note._id !== id;
         })
         setnotes(newNote)
     }
 
-    // Edit Or Update a Note
-    const editNote = () => {
 
+
+    // Edit Or Update a Note
+    const editNote = async (id, title, description, tag) => {
+
+        //API Call 
+        const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkNDM4MDU0MGVlNzNkOGYyZDQ0NzMxIn0sImlhdCI6MTcwODY2NDgzMH0.HX33fsqXEjTRzTRE4sS8A83lDC_43O5ypeYQvFnCoQU"
+            },
+            body: JSON.stringify({ title, description, tag }),
+        });
+        const json = response.json;
+
+
+        // logic for edit in client side 
+        for (let index = 0; index < notes.length; index++) {
+            const element = notes[index];
+            if (element._id === id) {
+                element.title = title;
+                element.description = description;
+                element.tag = tag;
+            }
+
+        }
     }
 
     return (
-        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
+        <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getallNote }}>
             {props.children}
         </NoteContext.Provider>
     )

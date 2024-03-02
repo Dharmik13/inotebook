@@ -1,13 +1,17 @@
 // this file is for featch all the notes 
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import noteContext from '../context/notes/noteContext';
 import Noteitem from './Noteitem';
 import Addnote from './Addnote';
 
 const Notes = () => {
+
     const context = useContext(noteContext);
-    const { notes } = context;
+    const { notes, getallNote } = context;
+    useEffect(() => {
+        getallNote();
+    }, []);
     return (
         <>
             <Addnote />

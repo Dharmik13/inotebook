@@ -1,0 +1,14 @@
+   ----> Code FOr Fetch API :- 
+
+   const response = await fetch(url, {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkNDM4MDU0MGVlNzNkOGYyZDQ0NzMxIn0sImlhdCI6MTcwODY2NDgzMH0.HX33fsqXEjTRzTRE4sS8A83lDC_43O5ypeYQvFnCoQU"
+            },
+            body: JSON.stringify( data),   // whatever in body write as data
+        });
+        const json = response.json;
+
+
+        ---->this code os take from fetch API Header Website
