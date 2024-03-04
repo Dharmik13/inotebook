@@ -44,9 +44,6 @@ const NoteState = (props) => {
             body: JSON.stringify({ title, description, tag }),
         });
 
-
-
-
         // logic for ADD note in client side 
         const note = {
             "_id": "65d83273ed25632e7a99f3ef6",
@@ -63,9 +60,18 @@ const NoteState = (props) => {
 
 
     // Delete A note 
-    const deleteNote = (id) => {
+    const deleteNote = async (id) => {
 
         //API Call 
+        const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+            method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVkNDM4MDU0MGVlNzNkOGYyZDQ0NzMxIn0sImlhdCI6MTcwODY2NDgzMH0.HX33fsqXEjTRzTRE4sS8A83lDC_43O5ypeYQvFnCoQU"
+            },
+        });
+        const json = await response.json();
+        console.log(json)
 
         // logic for Delete in client side 
         const newNote = notes.filter((note) => {
@@ -88,7 +94,8 @@ const NoteState = (props) => {
             },
             body: JSON.stringify({ title, description, tag }),
         });
-        const json = response.json;
+        const json = await response.json;
+        console.log(json);
 
 
         // logic for edit in client side 
