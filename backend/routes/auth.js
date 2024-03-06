@@ -36,6 +36,7 @@ router.post('/createuser', [
     try {
         let user = await User.findOne({ email: req.body.email });
         if (user) {
+
             return res.status(400).json({ errors: "Sorry a user with this email is already exists" });
         }
 
@@ -76,6 +77,7 @@ router.post('/login', [
     body('password', 'Password can Not be Blank').exists(),
 
 ], async (req, res) => {
+    let success = false;
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -86,12 +88,14 @@ router.post('/login', [
     try {
         let user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ errors: "Please Try to login with correct credentials" });
+            success = false;
+            return res.status(400).json({ success, errors: "Please Try to login with correct credentials" });
         }
 
         const passwordCompare = await bcrypt.compare(password, user.password);
         if (!passwordCompare) {
-            return res.status(400).json({ errors: "Please Try to login with correct credentials" });
+            success = false;
+            return res.status(400).json({ success, errors: "Please Try to login with correct credentials" });
         }
 
         const data = {
@@ -101,7 +105,8 @@ router.post('/login', [
         }
 
         const authtoken = jwt.sign(data, JWT_SECRET);
-        res.json({ authtoken });
+        success = true;
+        res.json({ success, authtoken });
 
     } catch (error) {
         console.error(error.message);
