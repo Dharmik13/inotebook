@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import noteContext from '../context/notes/noteContext';
 
 
-const Addnote = () => {
+const Addnote = (props) => {
 
     const context = useContext(noteContext);
     const { addNote } = context;
@@ -13,6 +13,7 @@ const Addnote = () => {
         e.preventDefault();  // this for no page reload
         addNote(note.title, note.description, note.tag)
         setnote({ title: "", description: "", tag: "" })
+        props.showAlert("Note Added SuccessFully", "success");
     }
 
     const onChange = (e) => {

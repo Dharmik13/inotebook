@@ -10,6 +10,7 @@ const Noteitem = (props) => {
     const handleDelete = (e) => {
         e.preventDefault();
         deleteNote(note._id);
+        props.showAlert("Note Deleted SuccessFully", "success");
     }
     return (
         <div className='col-md-3'>

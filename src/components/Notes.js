@@ -5,7 +5,7 @@ import noteContext from '../context/notes/noteContext';
 import Noteitem from './Noteitem';
 import Addnote from './Addnote';
 
-const Notes = () => {
+const Notes = (props) => {
 
     const context = useContext(noteContext);
     const { notes, getallNote, editNote } = context;
@@ -28,6 +28,7 @@ const Notes = () => {
     const handleClick = (e) => {
         console.log("Updating Note", note)
         editNote(note.id, note.etitle, note.edescription, note.etag)
+        props.showAlert("Note Updated SuccessFully", "success");
         refClose.current.click();
 
     }
@@ -38,7 +39,7 @@ const Notes = () => {
 
     return (
         <>
-            <Addnote />
+            <Addnote showAlert={props.showAlert} />
 
             <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
@@ -85,7 +86,7 @@ const Notes = () => {
 
                 {/* featch All notes Without Using Api , we do hard code   */}
                 {notes.map((note) => {
-                    return <Noteitem key={note._id} updateNote={updateNote} note={note} />
+                    return <Noteitem key={note._id} updateNote={updateNote} showAlert={props.showAlert} note={note} />
 
 
                 })}
