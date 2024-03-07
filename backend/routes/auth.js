@@ -26,9 +26,10 @@ router.post('/createuser', [
     body('email', 'Enter Valid Email please Cheack').isEmail(),
     body('password', 'Your Password is not valid , please Enter valid Password').isLength({ min: 5 })
 ], async (req, res) => {
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ success, errors: errors.array() });
     }
 
     // check the new created user is already exists or not with the help of email
@@ -37,7 +38,7 @@ router.post('/createuser', [
         let user = await User.findOne({ email: req.body.email });
         if (user) {
 
-            return res.status(400).json({ errors: "Sorry a user with this email is already exists" });
+            return res.status(400).json({ success, errors: "Sorry a user with this email is already exists" });
         }
 
         // bcrypt js - here we generate salt for more secure password
@@ -58,7 +59,8 @@ router.post('/createuser', [
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET);
-        res.json({ authtoken });
+        success = true;
+        res.json({ success, authtoken });
     }
 
     catch (error) {

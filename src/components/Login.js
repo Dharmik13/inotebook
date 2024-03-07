@@ -47,7 +47,7 @@ const Login = () => {
                     <input type="password" className="form-control" id="password" name='password' onChange={onChange} />
                 </div>
 
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Login</button>
             </form>
         </div>
     )
