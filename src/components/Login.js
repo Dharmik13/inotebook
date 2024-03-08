@@ -23,8 +23,8 @@ const Login = (props) => {
             // save the authtoken into the local storage and redirect to the home page using useHistory hook
 
             localStorage.setItem('token', json.authtoken);   // for  save the authtoken into the local storage
-            history("/");  // for redirect to the home page using useHistory hook
             props.showAlert("Logged In SuccessFully", "success");
+            history("/");  // for redirect to the home page using useHistory hook
         }
         else {
             props.showAlert("Invalid Credentials", "danger");
@@ -36,8 +36,9 @@ const Login = (props) => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className='my-3'>
+            <h2>Login to Continue the inotebook App</h2>
+            <form className='my-3' onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="email" name='email' aria-describedby="emailHelp" onChange={onChange} />

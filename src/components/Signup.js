@@ -37,7 +37,8 @@ const Signup = (props) => {
     return (
 
         <div>
-            <form onSubmit={handleSubmit}>
+            <h2>Create Account to use inotebook App</h2>
+            <form className='my-3' onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name</label>
                     <input type="text" className="form-control" id="name" name="name" aria-describedby="emailHelp" onChange={onChange} minLength={2} required />
