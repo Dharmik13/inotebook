@@ -15,7 +15,7 @@ const Noteitem = (props) => {
     return (
         <div className='col-md-3'>
             <div className="card my-3">
-
+                <img src="img/inotebook_card.jpg" class="card-img-top" alt="error" />
                 <div className="card-body">
                     <h5 className="card-title">{note.title}</h5>
                     <p className="card-text">{note.description}</p>

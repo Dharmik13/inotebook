@@ -36,7 +36,7 @@ const Signup = (props) => {
     }
     return (
 
-        <div>
+        <div className='signup'>
             <h2>Create Account to use inotebook App</h2>
             <form className='my-3' onSubmit={handleSubmit}>
                 <div className="mb-3">

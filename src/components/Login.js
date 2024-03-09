@@ -36,7 +36,7 @@ const Login = (props) => {
     }
 
     return (
-        <div className='my-3'>
+        <div className='login my-3'>
             <h2>Login to Continue the inotebook App</h2>
             <form className='my-3' onSubmit={handleSubmit}>
                 <div className="mb-3">
